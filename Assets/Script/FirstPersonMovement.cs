@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityStandardAssets.CrossPlatformInput;
+using UnityEngine.UI;
 
 public class FirstPersonMovement : MonoBehaviour
 {
@@ -19,13 +20,18 @@ public class FirstPersonMovement : MonoBehaviour
     Color Floorcolor;
     Animator animator;
     private GameObject PlayerCamera;
+    [SerializeField] GameObject ResultSceneMoveButton;
+    public float StayTime = 0.0f; 
+   
+   
 
-    private void Start()
+    void Start()
     {
        
         rigidbody = GetComponent<Rigidbody>();
         animator = GetComponent<Animator>();
         PlayerCamera = GameObject.Find("PlayerFollowingCamera");
+      
     }
 
     void Update()
@@ -86,6 +92,7 @@ public class FirstPersonMovement : MonoBehaviour
         {
             //GetComponent<Renderer>().material.color = Color.white;
         }
+        StayTime += Time.deltaTime;
     }
 
 
@@ -103,7 +110,11 @@ public class FirstPersonMovement : MonoBehaviour
             collision.gameObject.GetComponent<FloorManager>().DeleteFloor();
         }
 
-      
+        if (collision.gameObject.tag == "destination")
+        {
+            PlayerPrefs.SetFloat("staytime", StayTime);
+            ResultSceneMoveButton.SetActive(true);
+        }
     }
     /*
     private void OnCollisionExit(Collision collision)
