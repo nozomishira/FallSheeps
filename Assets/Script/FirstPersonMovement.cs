@@ -9,7 +9,7 @@ public class FirstPersonMovement : MonoBehaviour
     [SerializeField] float timer = 2.5f;//床が消される秒数
     Rigidbody rigidbody;
     RaycastHit hit;
-    public float speed = 2.5f;
+    public float speed = 1.5f;
     public float sphereRadius;
     Vector3 velocity;
     float jumpPower = 2;
