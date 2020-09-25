@@ -49,7 +49,7 @@ public class DuckEnemyScript : MonoBehaviour
                 direction = (destination - transform.position).normalized;
                 transform.LookAt(new Vector3(destination.x, transform.position.y, destination.z));
                 velocity = direction * walkSpeed;
-                Debug.Log(destination);
+               // Debug.Log(destination);
             }else
             {
                 StartCoroutine("RotateAxisY");
@@ -135,7 +135,7 @@ public class DuckEnemyScript : MonoBehaviour
     {
         if (collision.gameObject.tag == "floor")
         {
-            Debug.Log("地面接触" + collision.gameObject.name);
+            //Debug.Log("地面接触" + collision.gameObject.name);
             //this.Floorcolor = collision.gameObject.GetComponent<Renderer>().material.color;
             //collision.gameObject.GetComponent<Renderer>().material.color = Color.red;
             for (int i = 0; i < collision.gameObject.GetComponent<Renderer>().materials.Length; i++)

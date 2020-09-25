@@ -11,12 +11,13 @@ public class ResultSceneMoveButtun : MonoBehaviour
     public Button ResultSceneMoveButton;
     //public GameObject gameobjResultSceneMoveButton;
     public static int ResultSceneMoveButtonflag = 0;
+    private AudioSource audio = new AudioSource();
 
     void Start()
     {
-        // ResultSceneMoveButton.gameObject.SetActive(false);
         this.gameObject.SetActive(false);
-       // ResultSceneMoveButton.interactable = false;
+        audio = GetComponent<AudioSource>();
+        if (audio == null) audio = gameObject.AddComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -32,6 +33,7 @@ public class ResultSceneMoveButtun : MonoBehaviour
 
     public void OnClick()
     {
+        //audio.PlayOneShot(audio.clip);
         SceneManager.LoadScene("EndScene");
     }
 }

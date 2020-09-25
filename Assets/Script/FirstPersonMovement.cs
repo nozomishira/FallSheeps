@@ -10,7 +10,7 @@ public class FirstPersonMovement : MonoBehaviour
     [SerializeField] float timer = 2.5f;//床が消される秒数
     Rigidbody rigidbody;
     RaycastHit hit;
-    public float speed = 1.5f;
+    public float speed = 1.0f;
     public float sphereRadius;
     Vector3 velocity;
     float jumpPower = 2;
@@ -21,9 +21,11 @@ public class FirstPersonMovement : MonoBehaviour
     Animator animator;
     private GameObject PlayerCamera;
     [SerializeField] GameObject ResultSceneMoveButton;
-    public float StayTime = 0.0f; 
-   
-   
+    public float StayTime = 0.0f;
+    //public AudioClip stepsound;
+    private AudioSource audiosource = new AudioSource();
+
+
 
     void Start()
     {
@@ -31,7 +33,9 @@ public class FirstPersonMovement : MonoBehaviour
         rigidbody = GetComponent<Rigidbody>();
         animator = GetComponent<Animator>();
         PlayerCamera = GameObject.Find("PlayerFollowingCamera");
-      
+        audiosource = GetComponent<AudioSource>();
+        if (audiosource == null) audiosource = gameObject.AddComponent<AudioSource>();
+
     }
 
     void Update()
@@ -100,9 +104,10 @@ public class FirstPersonMovement : MonoBehaviour
     {
         if (collision.gameObject.tag == "floor")
         {
-            Debug.Log("地面接触" + collision.gameObject.name);
-           // this.Floorcolor = collision.gameObject.GetComponent<Renderer>().material.color;
+            //Debug.Log("地面接触" + collision.gameObject.name);
+            // this.Floorcolor = collision.gameObject.GetComponent<Renderer>().material.color;
             //collision.gameObject.GetComponent<Renderer>().material.color = Color.red;
+            audiosource.PlayOneShot(audiosource.clip);
             for (int i = 0; i < collision.gameObject.GetComponent<Renderer>().materials.Length; i++)
             {
                 collision.gameObject.GetComponent<Renderer>().materials[i].color = Color.black;

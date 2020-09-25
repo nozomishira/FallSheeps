@@ -8,7 +8,7 @@ public class PlayerCameraFollwing : MonoBehaviour
     private Vector3 prevPlayerPos;
     private Vector3 posVector;
     public float scale = 3.0f;
-    public float cameraSpeed = 900.0f;
+    public float cameraSpeed = 1000.0f;
 
     void Start()
     {

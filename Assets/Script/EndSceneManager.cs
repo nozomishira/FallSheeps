@@ -14,7 +14,7 @@ public class EndSceneManager : MonoBehaviour
     void Start()
     {
         lasttimer = PlayerPrefs.GetFloat("staytime");
-        lasttimerText.text = lasttimer.ToString();
+        lasttimerText.text = lasttimer.ToString("F1")+"秒";
 
         if (PlayerPrefs.HasKey("LongestTimer") == true)
         {
@@ -30,7 +30,12 @@ public class EndSceneManager : MonoBehaviour
             longesttimer = lasttimer;
             PlayerPrefs.SetFloat("LongestTimer", longesttimer);
         }
-        longesttimerText.text = longesttimer.ToString();
+        longesttimerText.text = longesttimer.ToString("F1")+"秒";
+    }
+
+    public void OnclicMoveStart()
+    {
+        SceneManager.LoadScene("StartScene");
     }
 
    
