@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityStandardAssets.CrossPlatformInput;
+using UnityEngine.UI;
 
 public class FirstPersonMovement : MonoBehaviour
 {
@@ -9,23 +10,32 @@ public class FirstPersonMovement : MonoBehaviour
     [SerializeField] float timer = 2.5f;//床が消される秒数
     Rigidbody rigidbody;
     RaycastHit hit;
-    public float speed = 2.5f;
+    public float speed = 1.0f;
     public float sphereRadius;
     Vector3 velocity;
-    float jumpPower = 2;
+    float jumpPower = 2.5f;
     [SerializeField] private float m_speedScale = 5.0f;
     [SerializeField] private float applySpeed = 0.2f;       // 回転の適用速度
     Vector3 playerPos;
     Color Floorcolor;
     Animator animator;
     private GameObject PlayerCamera;
+    [SerializeField] GameObject ResultSceneMoveButton;
+    public float StayTime = 0.0f;
+    //public AudioClip stepsound;
+    private AudioSource audiosource = new AudioSource();
 
-    private void Start()
+
+
+    void Start()
     {
        
         rigidbody = GetComponent<Rigidbody>();
         animator = GetComponent<Animator>();
         PlayerCamera = GameObject.Find("PlayerFollowingCamera");
+        audiosource = GetComponent<AudioSource>();
+        if (audiosource == null) audiosource = gameObject.AddComponent<AudioSource>();
+
     }
 
     void Update()
@@ -86,6 +96,7 @@ public class FirstPersonMovement : MonoBehaviour
         {
             //GetComponent<Renderer>().material.color = Color.white;
         }
+        StayTime += Time.deltaTime;
     }
 
 
@@ -93,9 +104,10 @@ public class FirstPersonMovement : MonoBehaviour
     {
         if (collision.gameObject.tag == "floor")
         {
-            Debug.Log("地面接触" + collision.gameObject.name);
-           // this.Floorcolor = collision.gameObject.GetComponent<Renderer>().material.color;
+            //Debug.Log("地面接触" + collision.gameObject.name);
+            // this.Floorcolor = collision.gameObject.GetComponent<Renderer>().material.color;
             //collision.gameObject.GetComponent<Renderer>().material.color = Color.red;
+            audiosource.PlayOneShot(audiosource.clip);
             for (int i = 0; i < collision.gameObject.GetComponent<Renderer>().materials.Length; i++)
             {
                 collision.gameObject.GetComponent<Renderer>().materials[i].color = Color.black;
@@ -103,7 +115,12 @@ public class FirstPersonMovement : MonoBehaviour
             collision.gameObject.GetComponent<FloorManager>().DeleteFloor();
         }
 
-      
+        if (collision.gameObject.tag == "destination")
+        {
+            PlayerPrefs.SetFloat("staytime", StayTime);
+            PlayerPrefs.SetInt("playerranking", RankingManager.PlayerRanking);
+            ResultSceneMoveButton.SetActive(true);
+        }
     }
     /*
     private void OnCollisionExit(Collision collision)
@@ -125,9 +142,9 @@ public class FirstPersonMovement : MonoBehaviour
 
         var scale = transform.lossyScale.x * 1.0f;
 
-        var isHit = Physics.BoxCast(transform.position, Vector3.one * scale, transform.forward, out hit, transform.rotation);
+        //var isHit = Physics.BoxCast(transform.position, Vector3.one * scale, transform.forward, out hit, transform.rotation);
         //var isHit = Physics.BoxCast(transform.position, Vector3.one * scale, transform.up*-0.5f, out hit, transform.rotation);
-        //var isHit = Physics.Raycast(this.transform.position, transform.up * -0.25f, out hit, 1.0f);
+       var isHit = Physics.Raycast(this.transform.position, transform.up * -1.0f, out hit, 1.0f);
 
 
         if (isHit)
@@ -146,6 +163,7 @@ public class FirstPersonMovement : MonoBehaviour
 
     void Jump()//jumpを行う関数
     {
+        //Debug.Log("jmp");
         rigidbody.AddForce(Vector3.up * 100 * jumpPower);
     }
 }

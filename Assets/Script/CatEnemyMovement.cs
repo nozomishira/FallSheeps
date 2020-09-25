@@ -80,7 +80,7 @@ public class CatEnemyMovement : MonoBehaviour
     {
         if (collision.gameObject.tag == "floor")
         {
-            Debug.Log("地面接触" + collision.gameObject.name);
+            //Debug.Log("地面接触" + collision.gameObject.name);
             //this.Floorcolor = collision.gameObject.GetComponent<Renderer>().material.color;
             //collision.gameObject.GetComponent<Renderer>().material.color = Color.red;
             for (int i = 0; i < collision.gameObject.GetComponent<Renderer>().materials.Length; i++)
@@ -89,6 +89,8 @@ public class CatEnemyMovement : MonoBehaviour
             }
             collision.gameObject.GetComponent<FloorManager>().DeleteFloor();
         }
+
+        
 
     }
     /*
