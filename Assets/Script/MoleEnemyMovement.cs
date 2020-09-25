@@ -38,6 +38,8 @@ public class MoleEnemyMovement : MonoBehaviour
             collision.gameObject.GetComponent<FloorManager>().DeleteFloor();
         }
 
+       
+
     }
     /*
     private void OnCollisionExit(Collision collision)

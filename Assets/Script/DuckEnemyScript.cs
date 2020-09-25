@@ -12,7 +12,7 @@ public class DuckEnemyScript : MonoBehaviour
 
     //　歩くスピード
     [SerializeField]
-    private float walkSpeed = 4.0f;
+    private float walkSpeed = 40.0f;
     //　速度
     private Vector3 velocity;
     //　移動方向
@@ -144,6 +144,8 @@ public class DuckEnemyScript : MonoBehaviour
             }
             collision.gameObject.GetComponent<FloorManager>().DeleteFloor();
         }
+
+       
 
     }
 }

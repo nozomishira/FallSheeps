@@ -10,6 +10,7 @@ TagManager:
   - floor
   - CheckMoleTransform_y
   - destination
+  - Enemy
   layers:
   - Default
   - TransparentFX

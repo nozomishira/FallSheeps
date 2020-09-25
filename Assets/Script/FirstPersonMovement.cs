@@ -13,7 +13,7 @@ public class FirstPersonMovement : MonoBehaviour
     public float speed = 1.0f;
     public float sphereRadius;
     Vector3 velocity;
-    float jumpPower = 2;
+    float jumpPower = 2.5f;
     [SerializeField] private float m_speedScale = 5.0f;
     [SerializeField] private float applySpeed = 0.2f;       // 回転の適用速度
     Vector3 playerPos;
@@ -118,6 +118,7 @@ public class FirstPersonMovement : MonoBehaviour
         if (collision.gameObject.tag == "destination")
         {
             PlayerPrefs.SetFloat("staytime", StayTime);
+            PlayerPrefs.SetInt("playerranking", RankingManager.PlayerRanking);
             ResultSceneMoveButton.SetActive(true);
         }
     }
@@ -141,9 +142,9 @@ public class FirstPersonMovement : MonoBehaviour
 
         var scale = transform.lossyScale.x * 1.0f;
 
-        var isHit = Physics.BoxCast(transform.position, Vector3.one * scale, transform.forward, out hit, transform.rotation);
+        //var isHit = Physics.BoxCast(transform.position, Vector3.one * scale, transform.forward, out hit, transform.rotation);
         //var isHit = Physics.BoxCast(transform.position, Vector3.one * scale, transform.up*-0.5f, out hit, transform.rotation);
-        //var isHit = Physics.Raycast(this.transform.position, transform.up * -0.25f, out hit, 1.0f);
+       var isHit = Physics.Raycast(this.transform.position, transform.up * -1.0f, out hit, 1.0f);
 
 
         if (isHit)
@@ -162,6 +163,7 @@ public class FirstPersonMovement : MonoBehaviour
 
     void Jump()//jumpを行う関数
     {
+        //Debug.Log("jmp");
         rigidbody.AddForce(Vector3.up * 100 * jumpPower);
     }
 }

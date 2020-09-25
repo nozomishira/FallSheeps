@@ -8,13 +8,17 @@ public class EndSceneManager : MonoBehaviour
 {
     public Text lasttimerText;
     public Text longesttimerText;
+    public Text rankingText;
     float lasttimer;
     float longesttimer;
+    int ranking;
 
     void Start()
     {
         lasttimer = PlayerPrefs.GetFloat("staytime");
         lasttimerText.text = lasttimer.ToString("F1")+"秒";
+        ranking = PlayerPrefs.GetInt("playerranking");
+        rankingText.text = ranking.ToString() + "位";
 
         if (PlayerPrefs.HasKey("LongestTimer") == true)
         {

@@ -90,6 +90,8 @@ public class CatEnemyMovement : MonoBehaviour
             collision.gameObject.GetComponent<FloorManager>().DeleteFloor();
         }
 
+        
+
     }
     /*
     private void OnCollisionExit(Collision collision)
