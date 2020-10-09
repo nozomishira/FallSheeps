@@ -16,14 +16,15 @@ public class FinalStageManager : MonoBehaviour
         
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
-        if (collision.gameObject.tag == "Enemy")
+        if (other.gameObject.tag == "Enemy")
         {
+            Debug.Log("enemy");
             RankingManager.PlayerRanking--;
         }
 
-        if (collision.gameObject.tag == "Player")
+        if (other.gameObject.tag == "Player")
         {
             Debug.Log(RankingManager.PlayerRanking);
         }

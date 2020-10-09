@@ -8,7 +8,7 @@ public class RankingManager : MonoBehaviour
 
     void Start()
     {
-        
+        PlayerRanking = 12;
     }
 
     // Update is called once per frame
