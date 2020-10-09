@@ -74,7 +74,7 @@ public class DuckEnemyScript : MonoBehaviour
             //　待ち時間を越えたら次の目的地を設定
             if (elapsedTime > waitTime)
             {
-                Debug.Log(elapsedTime);
+                //Debug.Log(elapsedTime);
                 CreateRandomPosition();
                 destination = GetDestination();
                 arrived = false;

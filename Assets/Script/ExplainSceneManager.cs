@@ -10,7 +10,7 @@ public class ExplainSceneManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        RankingManager.PlayerRanking = 12;
     }
 
     // Update is called once per frame

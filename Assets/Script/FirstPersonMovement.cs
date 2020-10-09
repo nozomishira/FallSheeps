@@ -10,7 +10,7 @@ public class FirstPersonMovement : MonoBehaviour
     [SerializeField] float timer = 2.5f;//床が消される秒数
     Rigidbody rigidbody;
     RaycastHit hit;
-    public float speed = 1.0f;
+    public float speed = 0.5f;
     public float sphereRadius;
     Vector3 velocity;
     float jumpPower = 2.5f;
@@ -115,7 +115,13 @@ public class FirstPersonMovement : MonoBehaviour
             collision.gameObject.GetComponent<FloorManager>().DeleteFloor();
         }
 
-        if (collision.gameObject.tag == "destination")
+     
+    }
+
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "destination")
         {
             PlayerPrefs.SetFloat("staytime", StayTime);
             PlayerPrefs.SetInt("playerranking", RankingManager.PlayerRanking);
